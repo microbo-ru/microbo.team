@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,27 @@ export type Speaker = {
   image: Image;
   imageSquare: Image;
 };
+
+export type Hack = {
+  name: string;
+  slug: string;
+  location: string;
+  link: Link;
+  team: Member[];
+};
+
+export type Member = {
+  name: string;
+  bio: string;
+  title: string;
+  slug: string;
+  twitter: string;
+  github: string;
+  company: string;
+  image: Image;
+  imageSquare: Image;
+};
+
 
 export type Stage = {
   name: string;

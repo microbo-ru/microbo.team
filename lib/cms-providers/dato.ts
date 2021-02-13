@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Job, Sponsor, Stage, Speaker } from '@lib/types';
+import { Job, Sponsor, Stage, Speaker, Member, Hack } from '@lib/types';
 
 const API_URL = 'https://graphql.datocms.com/';
 const API_TOKEN = process.env.DATOCMS_READ_ONLY_API_TOKEN;
@@ -69,6 +69,29 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
   return data.allSpeakers;
 }
 
+export async function getAllMembers(): Promise<Member[]> {
+  const data = await fetchCmsAPI(`
+    {
+      allMembers(first: 100) {
+        name
+        bio
+        title
+        slug
+        twitter
+        github
+        image {
+          url(imgixParams: {fm: jpg, fit: crop, w: 300, h: 400})
+        }
+        imageSquare: image {
+          url(imgixParams: {fm: jpg, fit: crop, w: 192, h: 192})
+        }
+      }
+    }
+  `);
+
+  return data.allMembers;
+}
+
 export async function getAllStages(): Promise<Stage[]> {
   const data = await fetchCmsAPI(`
     {
@@ -94,6 +117,39 @@ export async function getAllStages(): Promise<Stage[]> {
   `);
 
   return data.allStages;
+}
+
+export async function getAllHacks(): Promise<Hack[]> {
+  const data = await fetchCmsAPI(`
+    {
+      allHacks(first: 100, orderBy: order_ASC) {
+        name
+        slug
+        start
+        end
+        location { 
+          latitude
+          longitude
+        }
+        logo {
+          url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100})
+        }
+        cardImage {
+          url(imgixParams: {fm: jpg, fit: crop})
+        }
+        team {
+          title
+          name
+          slug
+          image {
+            url(imgixParams: {fm: jpg, fit: crop, w: 120, h: 120})
+          }
+        }
+      }
+    }
+  `);
+
+  return data.allHacks;
 }
 
 export async function getAllSponsors(): Promise<Sponsor[]> {

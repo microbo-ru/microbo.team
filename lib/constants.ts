@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ export const SITE_URL = 'https://demo.vercel.events';
 export const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN || new URL(SITE_URL).origin;
 export const TWITTER_USER_NAME = 'vercel';
 export const BRAND_NAME = 'ACME';
+export const TEAM_NAME = 'MICROBO';
 export const SITE_NAME_MULTILINE = ['ACME', 'Conf'];
 export const SITE_NAME = 'ACME Conf';
 export const META_DESCRIPTION =
@@ -37,20 +38,28 @@ export const COPYRIGHT_HOLDER = process.env.NEXT_PUBLIC_COPYRIGHT_HOLDER;
 
 export const CODE_OF_CONDUCT =
   'https://www.notion.so/vercel/Code-of-Conduct-Example-7ddd8d0e9c354bb597a0faed87310a78';
-export const REPO = 'https://github.com/vercel/virtual-event-starter-kit';
+export const REPO = 'https://github.com/microbo-ru';
 export const SAMPLE_TICKET_NUMBER = 1234;
 export const NAVIGATION = [
   {
-    name: 'Stage A',
-    route: '/stage/a'
+    name: 'PicsArt AI',
+    route: '/hack/picsart-ai'
   },
   {
-    name: 'Stage C',
-    route: '/stage/c'
+    name: 'Hack University',
+    route: '/hack/hackuniversity'
   },
   {
-    name: 'Stage M',
-    route: '/stage/m'
+    name: 'Cifri`SPB',
+    route: '/hack/cifri2019-spb'
+  },
+  {
+    name: 'Cifri`Final',
+    route: '/hack/cifri2019-final'
+  },
+  {
+    name: 'SMZ Hack',
+    route: '/hack/smzhack'
   },
   {
     name: 'Stage E',
@@ -63,6 +72,10 @@ export const NAVIGATION = [
   {
     name: 'Speakers',
     route: '/speakers'
+  },
+  {
+    name: 'Members',
+    route: '/members'
   },
   {
     name: 'Expo',
