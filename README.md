@@ -44,6 +44,12 @@ Then install packages and run the development server:
 yarn install
 yarn dev
 ```
+OR
+
+```bash
+npm install
+npm run dev
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -132,7 +138,6 @@ REDIS_EMAIL_TO_ID_SECRET=foo # Come up with your own secret string
 #### Using Redis On Vercel
 
 Provision your own Redis instance and set `REDIS_PORT`, `REDIS_URL`, `REDIS_PASSWORD`, and `REDIS_EMAIL_TO_ID_SECRET` (come up with your own secret string) on [Vercel Project Environment Variables Settings](https://vercel.com/docs/environment-variables) for the production environment.
-
 ## More Details
 
 ### Stages
