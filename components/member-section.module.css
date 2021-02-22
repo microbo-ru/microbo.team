@@ -127,3 +127,23 @@
 .githubIcon {
   margin-left: var(--space-2x);
 }
+
+.username {
+  display: inline-block;
+  font-size: calc(1em * var(--size));
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.skeleton {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding-inline: 5px;
+}
+
+.wrapper {
+  position: relative;
+}

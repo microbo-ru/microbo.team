@@ -20,6 +20,7 @@ import cn from 'classnames';
 import GithubIcon from '@components/icons/icon-github';
 import { Member } from '@lib/types';
 import styles from './member-section.module.css';
+import HackCard from '@components/hack-card';
 
 const TwitterIcon = () => (
   <svg width={24} viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -74,8 +75,10 @@ export default function MemberSection({ member }: Props) {
               {`${member.title} @ `}
               <span className={styles.company}>{member.company}</span>
             </p>
+
             <h2 className={styles['bio-header']}>Bio</h2>
             <p className={styles.bio}>{member.bio}</p>
+
             <h3 className={styles['socials-header']}>Social Media</h3>
             {member.twitter ? (
               <a
@@ -106,15 +109,34 @@ export default function MemberSection({ member }: Props) {
                 <GithubIcon color="#D8D8D8" size={24} />
               </span>
             )}
+
+            {member.skills && member.skills.length > 0 && (
+              <p className={styles.username}>
+                {member.skills.map(tech => (
+                  <span key={tech.slug + "-skill-span"} className={cn(styles.skeleton, styles.wrapper)}>
+                    {tech.text}
+                  </span>
+                ))}
+              </p>
+            )}
+
           </div>
         </div>
       </div>
-      {/*{speaker.talk && (
-        <div className={styles['talk-details']}>
-          <h3 className={styles['socials-header']}>{speaker.talk.title}</h3>
-          <p>{speaker.talk.description}</p>
+
+      {/*{member.skills && member.skills.length > 0 && (
+        <div className={styles['member-details']}>
+          <h3 className={styles['socials-header']}>Skills</h3>
+          <p className={styles.username}>
+            {member.skills.map(tech => (
+              <span key={tech.slug + "-skill-span"} className={cn(styles.skeleton, styles.wrapper)}>
+                {tech.text}
+              </span>
+            ))}
+          </p>
         </div>
       )}*/}
+
     </>
   );
 }
