@@ -37,6 +37,7 @@ export type Hack = {
   location: string;
   link: Link;
   team: Member[];
+  year: number;
 };
 
 export type Member = {
@@ -49,6 +50,7 @@ export type Member = {
   company: string;
   image: Image;
   imageSquare: Image;
+  skills: Tech[];
 };
 
 
@@ -69,7 +71,13 @@ export type Talk = {
 };
 
 export type Link = {
+  text: string;
   url: string;
+};
+
+export type Tech = {
+  text: string;
+  slug: string;
 };
 
 export type Sponsor = {
@@ -92,14 +100,19 @@ export type SponsorLink = {
   url: string;
 };
 
-export type Job = {
+export type Video = {
+  url: string;
+};
+
+export type Project = {
   id: string;
-  companyName: string;
-  title: string;
+  name: string;
   description: string;
-  discord: string;
-  link: string;
-  rank: number;
+  slug: string;
+  youtube: Video;
+  github: string;
+  links: Link[];
+  stack: Tech[];
 };
 
 export type ConfUser = {
