@@ -22,7 +22,6 @@ import * as prismicApi from './cms-providers/prismic';
 import * as storyblokApi from './cms-providers/storyblok';
 
 let cmsApi: {
-  //getAllSpeakers: () => Promise<Speaker[]>;
   getAllMembers: () => Promise<Member[]>;
   //getAllStages: () => Promise<Stage[]>;
   getAllHacks: () => Promise<Hack[]>;
@@ -46,7 +45,6 @@ if (process.env.DATOCMS_READ_ONLY_API_TOKEN) {
   cmsApi = agilityApi;
 } else {
   cmsApi = {
-    //getAllSpeakers: async () => [],
     getAllMembers: async () => [],
     //getAllStages: async () => [],
     getAllHacks: async () => [],
@@ -54,12 +52,6 @@ if (process.env.DATOCMS_READ_ONLY_API_TOKEN) {
     getAllProjects: async () => []
   };
 }
-
-/*
-export async function getAllSpeakers(): Promise<Speaker[]> {
-  return cmsApi.getAllSpeakers();
-}
-*/
 
 export async function getAllMembers(): Promise<Member[]> {
   return cmsApi.getAllMembers();

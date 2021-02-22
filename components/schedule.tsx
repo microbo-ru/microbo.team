@@ -45,8 +45,8 @@ type ScheduleProps = {
   allHacks: Hack[];
 };
 
-function compareNumbersDesc(a, b) {
-  return b - a;
+function compareNumbersDesc(a: string, b: string) {
+  return (Number(b) - Number(a));
 }
 
 export default function Schedule({ allHacks }: ScheduleProps) {
