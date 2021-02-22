@@ -42,6 +42,10 @@ export const REPO = 'https://github.com/microbo-ru';
 export const SAMPLE_TICKET_NUMBER = 1234;
 export const NAVIGATION = [
   {
+    name: 'Schedule',
+    route: '/schedule'
+  },
+  {
     name: 'PicsArt AI',
     route: '/hack/picsart-ai'
   },
@@ -61,29 +65,27 @@ export const NAVIGATION = [
     name: 'SMZ Hack',
     route: '/hack/smzhack'
   },
+  /*
   {
     name: 'Stage E',
     route: '/stage/e'
-  },
-  {
-    name: 'Schedule',
-    route: '/schedule'
-  },
+  },*/
+  /*
   {
     name: 'Speakers',
     route: '/speakers'
-  },
+  },*/
   {
     name: 'Members',
     route: '/members'
   },
   {
-    name: 'Expo',
-    route: '/expo'
+    name: 'Projects',
+    route: '/projects'
   },
   {
-    name: 'Jobs',
-    route: '/jobs'
+    name: 'Expo',
+    route: '/expo'
   }
 ];
 
