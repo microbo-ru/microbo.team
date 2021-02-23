@@ -13,17 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Sponsor, Stage, Speaker, Member, Hack, Project } from '@lib/types';
+import { Sponsor, Member, Hack, Project } from '@lib/types';
 
-import * as agilityApi from './cms-providers/agility';
 import * as datoCmsApi from './cms-providers/dato';
-import * as contentfulApi from './cms-providers/contentful';
-import * as prismicApi from './cms-providers/prismic';
-import * as storyblokApi from './cms-providers/storyblok';
 
 let cmsApi: {
   getAllMembers: () => Promise<Member[]>;
-  //getAllStages: () => Promise<Stage[]>;
   getAllHacks: () => Promise<Hack[]>;
   getAllSponsors: () => Promise<Sponsor[]>;
   getAllProjects: () => Promise<Project[]>
@@ -31,22 +26,9 @@ let cmsApi: {
 
 if (process.env.DATOCMS_READ_ONLY_API_TOKEN) {
   cmsApi = datoCmsApi;
-} else if (process.env.CONTENTFUL_ACCESS_TOKEN && process.env.CONTENTFUL_SPACE_ID) {
-  cmsApi = contentfulApi;
-} else if (process.env.STORYBLOK_PREVIEW_TOKEN) {
-  cmsApi = storyblokApi;
-} else if (process.env.PRISMIC_REPO_ID) {
-  cmsApi = prismicApi;
-} else if (
-  process.env.AGILITY_GUID &&
-  process.env.AGILITY_API_FETCH_KEY &&
-  process.env.AGILITY_API_PREVIEW_KEY
-) {
-  cmsApi = agilityApi;
 } else {
   cmsApi = {
     getAllMembers: async () => [],
-    //getAllStages: async () => [],
     getAllHacks: async () => [],
     getAllSponsors: async () => [],
     getAllProjects: async () => []
