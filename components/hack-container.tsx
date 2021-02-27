@@ -20,8 +20,9 @@ import { Hack } from '@lib/types';
 import useLoginStatus from '@lib/hooks/use-login-status';
 import styles from './hack-container.module.css';
 import styleUtils from './utils.module.css';
-import ConfEntry from './conf-entry';
 import HackSidebar from '@components/hack-sidebar';
+import JoinHackEntry from '@components/join-hack-entry';
+import HackEntry from '@components/./hack-entry';
 
 type Props = {
   hack: Hack;
@@ -82,7 +83,12 @@ export default function HackContainer({ hack, allHacks }: Props) {
             </div>
           </div>
         ) : loginStatus === 'loading' ? null : (
-          <ConfEntry onRegister={() => mutate()} />
+          // <ConfEntry onRegister={() => mutate()} />
+          updatedHack.year == 2020 ? (
+            <JoinHackEntry onRegister={() => mutate()} />
+          ) : (
+            <HackEntry hack = {updatedHack} />
+          )
         )}
       </div>
       <HackSidebar allHacks={updatedHacks} />
