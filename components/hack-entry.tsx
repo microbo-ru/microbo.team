@@ -30,7 +30,8 @@ export default function HackEntry({ hack }: Props) {
     <div className={cn(styles.container, styleUtils.appear, styleUtils['appear-first'])}>
       <h1 className={cn(styles.hero)}>{hack.name}.</h1>
       <h2 className={cn(styles.description)}>Here awesome details about Hack project will go</h2>
-      <h2 className={cn(styles. description)}>
+      { /* TODO: provide short details here */ }
+      {/*<h2 className={cn(styles. description)}>
         <a
           aria-label="GitHub"
           className={styles.githubIcon}
@@ -40,7 +41,7 @@ export default function HackEntry({ hack }: Props) {
         >
           <GithubIcon color="#D8D8D8" size={24} />
         </a>
-      </h2>
+      </h2>*/}
     </div>
   );
 }
