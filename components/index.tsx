@@ -50,7 +50,8 @@ export default function Conf({
           {pageState === 'registration' && !sharePage ? (
             <>
               <Hero />
-              <Form />
+              {/* TODO: add registration button to join the team...*/}
+              {/*<Form />*/}
               <LearnMore />
             </>
           ) : (
