@@ -30,26 +30,32 @@ type Props = {
 
 const formatDate = (date: string) => {
   // https://github.com/date-fns/date-fns/issues/946
-  return format(parseISO(date), "h:mmaaaaa'm'");
+  // return format(parseISO(date), "h:mmaaaaa'm'");
+  return format(parseISO(date), "MMM dd");
 };
 
 export default function HackCard({ hack, showTime }: Props) {
-  const [isTalkLive, setIsTalkLive] = useState(false);
+  const [isHackLive, setIsHackLive] = useState(false);
+  const [startAndEndTime, setStartAndEndTime] = useState('');
 
   useEffect(() => {
     const now = Date.now();
+    if (hack.start && hack.end) {
+      setIsHackLive(isAfter(now, parseISO(hack.start)) && isBefore(now, parseISO(hack.end)));
+      setStartAndEndTime(`${formatDate(hack.start)} – ${formatDate(hack.end)}`);
+    }
   }, []);
 
-  //const firstSpeakerLink = `/speakers/${speaker[0].slug}`;
-  const firstSpeakerLink = `/speakers/AAA`;
+  const hackLink = `/hack/${hack.slug}`;
 
   return (
     <div key={hack.slug + "-card-div"} className={styles.talk}>
       This is some text above
-      <Link href={firstSpeakerLink}>
+      {showTime && <p className={styles.time}>{startAndEndTime || <>&nbsp;</>}</p>}
+      <Link href={hackLink}>
         <a
           className={cn(styles.card, {
-            [styles['is-live']]: isTalkLive
+            [styles['is-live']]: isHackLive
           })}
         >
           <div key={hack.slug + "-card-body"} className={styles['card-body']}>

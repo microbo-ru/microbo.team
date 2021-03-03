@@ -38,6 +38,8 @@ export type Hack = {
   link: Link;
   team: Member[];
   year: number;
+  start: string;
+  end: string;
 };
 
 export type Member = {

@@ -23,10 +23,20 @@ import styleUtils from './utils.module.css';
 import HackSidebar from '@components/hack-sidebar';
 import JoinHackEntry from '@components/join-hack-entry';
 import HackEntry from '@components/./hack-entry';
+import { format, isAfter, isBefore, parseISO } from 'date-fns';
+import { useEffect, useState } from 'react';
 
 type Props = {
   hack: Hack;
   allHacks: Hack[];
+};
+
+const isHackLive = (hack: Hack) => {
+  const now = Date.now();
+  if (hack.start && hack.end) {
+    return isAfter(now, parseISO(hack.start)) && isBefore(now, parseISO(hack.end));
+  }
+  return false;
 };
 
 export default function HackContainer({ hack, allHacks }: Props) {
@@ -84,7 +94,7 @@ export default function HackContainer({ hack, allHacks }: Props) {
           </div>
         ) : loginStatus === 'loading' ? null : (
           // <ConfEntry onRegister={() => mutate()} />
-          updatedHack.year == 2020 ? (
+          isHackLive(updatedHack) ? (
             <JoinHackEntry onRegister={() => mutate()} />
           ) : (
             <HackEntry hack = {updatedHack} />
