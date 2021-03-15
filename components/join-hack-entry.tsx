@@ -22,10 +22,17 @@ import LoadingDots from './loading-dots';
 import { register } from '@lib/user-api';
 import { SITE_DESCRIPTION } from '@lib/constants';
 import useEmailQueryParam from '@lib/hooks/use-email-query-param';
+import { Hack } from '@lib/types';
+import { format, parseISO } from 'date-fns';
 
 type FormState = 'default' | 'loading' | 'error';
 
 const DEFAULT_ERROR_MSG = 'Error! Please try again.';
+
+type Props = {
+  onRegister: () => void;
+  hack: Hack;
+};
 
 function getErrorMsg(code: string) {
   switch (code) {
@@ -36,7 +43,13 @@ function getErrorMsg(code: string) {
   }
 }
 
-export default function JoinHackEntry({ onRegister }: { onRegister: () => void }) {
+const formatDate = (date: string) => {
+  // https://github.com/date-fns/date-fns/issues/946
+  // return format(parseISO(date), "h:mmaaaaa'm'");
+  return format(parseISO(date), "MMMM d");
+};
+
+export default function JoinHackEntry({ onRegister, hack }: Props) {
   const [emailInput, setEmailInput] = useState('');
   const [focused, setFocused] = useState(false);
   const [formState, setFormState] = useState<FormState>('default');
@@ -76,10 +89,24 @@ export default function JoinHackEntry({ onRegister }: { onRegister: () => void }
   }, []);
 
   return (
-    <div className={cn(styles.container, styleUtils.appear, styleUtils['appear-first'])}>
-      <h1 className={cn(styles.hero)}>Join the Hack.</h1>
-      <h2 className={cn(styles.description)}>{SITE_DESCRIPTION}</h2>
-      <form onSubmit={onSubmit} className={styles.form}>
+    <div className={cn(styles.container, styleUtils.appear )}>
+      <h1 className={cn(styles.hero, styleUtils.appear, styleUtils['appear-first'])}>Join the Hack.</h1>
+      <h2 className={cn(styles.description, styleUtils.appear, styleUtils['appear-first'])}>{SITE_DESCRIPTION}</h2>
+
+      {/* TODO: update content*/}
+      <div className={cn(styleUtils.appear, styleUtils.appear, styleUtils['appear-second'], styles.info)}>
+        <p>{formatDate(hack.start)} - {formatDate(hack.end)}</p>
+        <div className={styles['description-separator']} />
+        <p>
+          {hack.where  ? (
+            <strong> {hack.where} </strong>
+          ) : (
+            <strong> Ask us where </strong>
+          )}
+        </p>
+      </div>
+
+      <form onSubmit={onSubmit} className={ cn(styles.form, styleUtils.appear, styleUtils['appear-third'])}>
         <div className={styles['form-row']}>
           <label
             htmlFor="email-input-field"

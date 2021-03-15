@@ -95,7 +95,7 @@ export default function HackContainer({ hack, allHacks }: Props) {
         ) : loginStatus === 'loading' ? null : (
           // <ConfEntry onRegister={() => mutate()} />
           isHackLive(updatedHack) ? (
-            <JoinHackEntry onRegister={() => mutate()} />
+            <JoinHackEntry onRegister={() => mutate()} hack = {updatedHack} />
           ) : (
             <HackEntry hack = {updatedHack} />
           )
