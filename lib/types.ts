@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { StructuredText as StructuredTextGraphQlResponse } from 'datocms-structured-text-utils/dist/types/types';
+
 export type Image = {
   url: string;
 };
@@ -40,6 +42,7 @@ export type Hack = {
   year: number;
   start: string;
   end: string;
+  where: string;
 };
 
 export type Member = {
@@ -53,6 +56,7 @@ export type Member = {
   image: Image;
   imageSquare: Image;
   skills: Tech[];
+  content: StructuredTextGraphQlResponse
 };
 
 

@@ -75,6 +75,9 @@ export async function getAllMembers(): Promise<Member[]> {
       allMembers(first: 100) {
         name
         bio
+        content {
+          value
+        }
         title
         slug
         twitter
@@ -136,6 +139,7 @@ export async function getAllHacks(): Promise<Hack[]> {
           latitude
           longitude
         }
+        where
         logo {
           url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100})
         }
