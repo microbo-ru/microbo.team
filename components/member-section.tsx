@@ -21,6 +21,7 @@ import GithubIcon from '@components/icons/icon-github';
 import { Member } from '@lib/types';
 import styles from './member-section.module.css';
 import HackCard from '@components/hack-card';
+import { StructuredText } from "react-datocms";
 
 const TwitterIcon = () => (
   <svg width={24} viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -78,6 +79,15 @@ export default function MemberSection({ member }: Props) {
 
             <h2 className={styles['bio-header']}>Bio</h2>
             <p className={styles.bio}>{member.bio}</p>
+
+            {member.content && (
+              <div>
+                <h3 className={styles['socials-header']}>More</h3>
+                <div className={styles.bio}>
+                  <StructuredText data={member.content}></StructuredText>
+                </div>
+              </div>
+            )}
 
             <h3 className={styles['socials-header']}>Social Media</h3>
             {member.twitter ? (
