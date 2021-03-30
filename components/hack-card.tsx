@@ -50,8 +50,7 @@ export default function HackCard({ hack, showTime }: Props) {
 
   return (
     <div key={hack.slug + "-card-div"} className={styles.talk}>
-      This is some text above
-      {showTime && <p className={styles.time}>{startAndEndTime || <>&nbsp;</>}</p>}
+      <p className={styles.time}> {hack.where} / {showTime && startAndEndTime } </p>
       <Link href={hackLink}>
         <a
           className={cn(styles.card, {
