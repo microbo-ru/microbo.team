@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-export const SITE_URL = 'https://demo.vercel.events';
+export const SITE_URL = 'https://microbo.team';
 export const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN || new URL(SITE_URL).origin;
 export const TWITTER_USER_NAME = 'vercel';
-export const BRAND_NAME = 'ACME';
+export const BRAND_NAME = 'MICROBO';
 export const TEAM_NAME = 'MICROBO';
-export const SITE_NAME_MULTILINE = ['ACME', 'Conf'];
-export const SITE_NAME = 'ACME Conf';
+export const SITE_NAME_MULTILINE = ['Microbo', 'Team'];
+export const SITE_NAME = 'Microbo Team';
 export const META_DESCRIPTION =
-  'This is an open source demo that Next.js developers can clone, deploy, and fully customize for events. Created through collaboration of marketers, designers, and developers at Vercel.';
+  'This is an open source project that Next.js developers can clone, deploy, and fully customize for Team Events. Originally created through collaboration of marketers, designers, and developers at Vercel. Later adopted by Microbo to represent dev team activity ';
 export const SITE_DESCRIPTION =
   'An interactive online experience by the community, free for everyone.';
 export const DATE = 'October 27, 2020';
