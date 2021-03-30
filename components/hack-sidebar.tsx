@@ -37,10 +37,9 @@ export default function HackSidebar({ allHacks }: Props) {
 
   return (
     <div className={styles.schedule}>
-      <h3 className={styles.header}>Team</h3>
-      <p>{SHORT_DATE}</p>
+      <h3 className={styles.header}>Hack</h3>
       <Select
-        aria-label="Select a stage"
+        aria-label="Select a hack"
         value={currentHackSlug}
         onChange={e => {
           const slug = e.target.value;
@@ -54,8 +53,9 @@ export default function HackSidebar({ allHacks }: Props) {
           </option>
         ))}
       </Select>
+      <p><strong>{currentHack?.where}, {currentHack?.year}</strong></p>
 
-      // TODO: rename to SidebarMemberCard
+      <h3 className={styles.header}>Team</h3>
       <div className={styles.talks}>
         {currentHack?.team.map(member => (
           <MemberCard key={member.title} member={member} />
