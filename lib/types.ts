@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { StructuredText as StructuredTextGraphQlResponse } from 'datocms-structured-text-utils/dist/types/types';
 
 export type Image = {
   url: string;
@@ -31,6 +33,33 @@ export type Speaker = {
   imageSquare: Image;
 };
 
+export type Hack = {
+  name: string;
+  slug: string;
+  location: string;
+  link: Link;
+  team: Member[];
+  year: number;
+  start: string;
+  end: string;
+  where: string;
+};
+
+export type Member = {
+  name: string;
+  bio: string;
+  title: string;
+  slug: string;
+  twitter: string;
+  github: string;
+  company: string;
+  image: Image;
+  imageSquare: Image;
+  skills: Tech[];
+  content: StructuredTextGraphQlResponse
+};
+
+
 export type Stage = {
   name: string;
   slug: string;
@@ -48,7 +77,13 @@ export type Talk = {
 };
 
 export type Link = {
+  text: string;
   url: string;
+};
+
+export type Tech = {
+  text: string;
+  slug: string;
 };
 
 export type Sponsor = {
@@ -71,14 +106,19 @@ export type SponsorLink = {
   url: string;
 };
 
-export type Job = {
+export type Video = {
+  url: string;
+};
+
+export type Project = {
   id: string;
-  companyName: string;
-  title: string;
+  name: string;
   description: string;
-  discord: string;
-  link: string;
-  rank: number;
+  slug: string;
+  youtube: Video;
+  github: string;
+  links: Link[];
+  stack: Tech[];
 };
 
 export type ConfUser = {

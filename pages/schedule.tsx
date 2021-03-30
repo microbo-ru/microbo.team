@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,15 @@ import Schedule from '@components/schedule';
 import Layout from '@components/layout';
 import Header from '@components/header';
 
-import { getAllStages } from '@lib/cms-api';
-import { Stage } from '@lib/types';
+import { getAllHacks } from '@lib/cms-api';
+import { Hack } from '@lib/types';
 import { META_DESCRIPTION } from '@lib/constants';
 
 type Props = {
-  allStages: Stage[];
+  allHacks: Hack[];
 };
 
-export default function SchedulePage({ allStages }: Props) {
+export default function SchedulePage({ allHacks }: Props) {
   const meta = {
     title: 'Schedule - Virtual Event Starter Kit',
     description: META_DESCRIPTION
@@ -39,18 +39,18 @@ export default function SchedulePage({ allStages }: Props) {
     <Page meta={meta}>
       <Layout>
         <Header hero="Schedule" description={meta.description} />
-        <Schedule allStages={allStages} />
+        <Schedule allHacks={allHacks} />
       </Layout>
     </Page>
   );
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const allStages = await getAllStages();
+  const allHacks = await getAllHacks();
 
   return {
     props: {
-      allStages
+      allHacks
     },
     revalidate: 60
   };

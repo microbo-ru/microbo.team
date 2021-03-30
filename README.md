@@ -44,6 +44,12 @@ Then install packages and run the development server:
 yarn install
 yarn dev
 ```
+OR
+
+```bash
+npm install
+npm run dev
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -62,11 +68,8 @@ You’ll be asked to install the [DatoCMS](https://www.datocms.com) integration.
 Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms-api.ts) for details and `.env.local.example` for all environment variables. The demo ([demo.vercel.events](https://demo.vercel.events)) uses DatoCMS, but we also have support for:
 
 - [Agility](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fdemo.vercel.events%2F&demo-image=https%3A%2F%2Fdemo.vercel.events%2Fdeploy.png&integration-ids=oac_Dnqk9CoC6rZ18k9nVR9KresV&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%2C%20%22githubRepo%22%3A%20%22vercel%2Fvirtual-event-starter-kit%22%7D)
-- [Contentful](lib/cms-providers/contentful.ts)
 - [Prismic](lib/cms-providers/prismic/index.ts) ([Instructions](lib/cms-providers/prismic/README.md))
 - [Sanity](https://create.sanity.io/?template=sanity-io%2Fsanity-template-nextjs-event-starter)
-- [Storyblok](lib/cms-providers/storyblok.ts) 
-  - Click the following link to create the space for this starter kit in Storyblok: [Create Event Space](https://app.storyblok.com/#!/build/101757)
 
 ### Constants
 
@@ -132,7 +135,6 @@ REDIS_EMAIL_TO_ID_SECRET=foo # Come up with your own secret string
 #### Using Redis On Vercel
 
 Provision your own Redis instance and set `REDIS_PORT`, `REDIS_URL`, `REDIS_PASSWORD`, and `REDIS_EMAIL_TO_ID_SECRET` (come up with your own secret string) on [Vercel Project Environment Variables Settings](https://vercel.com/docs/environment-variables) for the production environment.
-
 ## More Details
 
 ### Stages

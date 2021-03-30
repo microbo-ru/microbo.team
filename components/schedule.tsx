@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,25 @@
  */
 
 import cn from 'classnames';
-import { Stage, Talk } from '@lib/types';
+import { Hack, Member, Talk } from '@lib/types';
 import styles from './schedule.module.css';
-import TalkCard from './talk-card';
+import HackCard from '@components/hack-card';
 
-function StageRow({ stage }: { stage: Stage }) {
-  // Group talks by the time block
-  const timeBlocks = stage.schedule.reduce((allBlocks: any, talk) => {
-    allBlocks[talk.start] = [...(allBlocks[talk.start] || []), talk];
-    return allBlocks;
-  }, {});
+type ByYearProps = {
+  year: string;
+  hacks: Hack[];
+};
 
+function YearRow({ year, hacks }: ByYearProps) {
   return (
-    <div key={stage.name} className={styles.row}>
-      <h3 className={cn(styles['stage-name'], styles[stage.slug])}>
-        <span>{stage.name}</span>
+    <div key={year + "-row"} className={styles.row}>
+      <h3 key={year + "-h3"} className={cn(styles['year'], styles[year])}>
+        <span>{year}</span>
       </h3>
-      <div className={cn(styles.talks, styles[stage.slug])}>
-        {Object.keys(timeBlocks).map((startTime: string) => (
-          <div key={startTime}>
-            {timeBlocks[startTime].map((talk: Talk, index: number) => (
-              <TalkCard key={talk.title} talk={talk} showTime={index === 0} />
-            ))}
+      <div key={year + "-hacks-div"} className={cn(styles.hacks, styles[year])}>
+        {hacks.map(hack => (
+          <div key={hack.slug + "-wrapper-div"}>
+            <HackCard key={hack.slug} hack={hack} showTime={hack.year > 2019} />
           </div>
         ))}
       </div>
@@ -44,16 +41,26 @@ function StageRow({ stage }: { stage: Stage }) {
   );
 }
 
-type Props = {
-  allStages: Stage[];
+type ScheduleProps = {
+  allHacks: Hack[];
 };
 
-export default function Schedule({ allStages }: Props) {
+function compareNumbersDesc(a: string, b: string) {
+  return (Number(b) - Number(a));
+}
+
+export default function Schedule({ allHacks }: ScheduleProps) {
+  // Group hacks by year
+  const yearBlocks = allHacks.reduce((byYear: any, hack) => {
+    byYear[hack.year] = [...(byYear[hack.year] || []), hack];
+    return byYear;
+  }, {});
+
   return (
     <div className={styles.container}>
       <div className={styles['row-wrapper']}>
-        {allStages.map(stage => (
-          <StageRow key={stage.slug} stage={stage} />
+        {Object.keys(yearBlocks).sort(compareNumbersDesc).map(year => (
+          <YearRow key={year + "-yearrow"} year={year} hacks={yearBlocks[year]} />
         ))}
       </div>
     </div>

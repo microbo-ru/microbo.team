@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,28 +17,27 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 
 import Page from '@components/page';
-import StageContainer from '@components/stage-container';
+import MemberSection from '@components/member-section';
 import Layout from '@components/layout';
 
-import { getAllStages } from '@lib/cms-api';
-import { Stage } from '@lib/types';
+import { getAllMembers } from '@lib/cms-api';
+import { Member } from '@lib/types';
 import { META_DESCRIPTION } from '@lib/constants';
 
 type Props = {
-  stage: Stage;
-  allStages: Stage[];
+  member: Member;
 };
 
-export default function StagePage({ stage, allStages }: Props) {
+export default function MemberPage({ member }: Props) {
   const meta = {
     title: 'Demo - Virtual Event Starter Kit',
     description: META_DESCRIPTION
   };
 
   return (
-    <Page meta={meta} fullViewport>
+    <Page meta={meta}>
       <Layout>
-        <StageContainer stage={stage} allStages={allStages} />
+        <MemberSection member={member} />
       </Layout>
     </Page>
   );
@@ -46,10 +45,10 @@ export default function StagePage({ stage, allStages }: Props) {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const slug = params?.slug;
-  const stages = await getAllStages();
-  const stage = stages.find((s: Stage) => s.slug === slug) || null;
+  const members = await getAllMembers();
+  const currentMember = members.find((m: Member) => m.slug === slug) || null;
 
-  if (!stage) {
+  if (!currentMember) {
     return {
       notFound: true
     };
@@ -57,16 +56,15 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   return {
     props: {
-      stage,
-      allStages: stages
+      member: currentMember
     },
     revalidate: 60
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const stages = await getAllStages();
-  const slugs = stages.map((s: Stage) => ({ params: { slug: s.slug } }));
+  const members = await getAllMembers();
+  const slugs = members.map((m: Member) => ({ params: { slug: m.slug } }));
 
   return {
     paths: slugs,

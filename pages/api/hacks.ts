@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
 
 import ms from 'ms';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAllStages } from '@lib/cms-api';
+import { getAllHacks } from '@lib/cms-api';
 
 // Number of seconds to cache the API response for
 const EXPIRES_SECONDS = 5;
 
-export default async function getStages(_: NextApiRequest, res: NextApiResponse) {
+export default async function getHacks(_: NextApiRequest, res: NextApiResponse) {
   try {
-    const allStages = await getAllStages();
+    const allHacks = await getAllHacks();
 
     // Set caching headers
     const expires = new Date(Date.now() + ms(`${EXPIRES_SECONDS}s`));
@@ -33,7 +33,7 @@ export default async function getStages(_: NextApiRequest, res: NextApiResponse)
       `s-maxage=${EXPIRES_SECONDS}, immutable, must-revalidate, stale-while-revalidate`
     );
 
-    return res.status(200).json(allStages);
+    return res.status(200).json(allHacks);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(e);

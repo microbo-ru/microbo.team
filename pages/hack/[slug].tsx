@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,27 +17,28 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 
 import Page from '@components/page';
-import SpeakerSection from '@components/speaker-section';
 import Layout from '@components/layout';
+import HackContainer from '@components/hack-container';
 
-import { getAllSpeakers } from '@lib/cms-api';
-import { Speaker } from '@lib/types';
+import { getAllHacks } from '@lib/cms-api';
+import { Hack } from '@lib/types';
 import { META_DESCRIPTION } from '@lib/constants';
 
 type Props = {
-  speaker: Speaker;
+  hack: Hack;
+  allHacks: Hack[];
 };
 
-export default function SpeakerPage({ speaker }: Props) {
+export default function HackPage({ hack, allHacks }: Props) {
   const meta = {
     title: 'Demo - Virtual Event Starter Kit',
     description: META_DESCRIPTION
   };
 
   return (
-    <Page meta={meta}>
+    <Page meta={meta} fullViewport>
       <Layout>
-        <SpeakerSection speaker={speaker} />
+        <HackContainer hack={hack} allHacks={allHacks} />
       </Layout>
     </Page>
   );
@@ -45,10 +46,10 @@ export default function SpeakerPage({ speaker }: Props) {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const slug = params?.slug;
-  const speakers = await getAllSpeakers();
-  const currentSpeaker = speakers.find((s: Speaker) => s.slug === slug) || null;
+  const hacks = await getAllHacks();
+  const hack = hacks.find((h: Hack) => h.slug === slug) || null;
 
-  if (!currentSpeaker) {
+  if (!hack) {
     return {
       notFound: true
     };
@@ -56,15 +57,16 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   return {
     props: {
-      speaker: currentSpeaker
+      hack,
+      allHacks: hacks
     },
     revalidate: 60
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const speakers = await getAllSpeakers();
-  const slugs = speakers.map((s: Speaker) => ({ params: { slug: s.slug } }));
+  const hacks = await getAllHacks();
+  const slugs = hacks.map((h: Hack) => ({ params: { slug: h.slug } }));
 
   return {
     paths: slugs,

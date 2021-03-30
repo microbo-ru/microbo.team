@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import cn from 'classnames';
 import GithubIcon from '@components/icons/icon-github';
-import { Speaker } from '@lib/types';
-import styles from './speaker-section.module.css';
+import { Member } from '@lib/types';
+import styles from './member-section.module.css';
+import HackCard from '@components/hack-card';
+import { StructuredText } from "react-datocms";
 
 const TwitterIcon = () => (
   <svg width={24} viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -31,13 +33,13 @@ const TwitterIcon = () => (
 );
 
 type Props = {
-  speaker: Speaker;
+  member: Member;
 };
 
-export default function SpeakerSection({ speaker }: Props) {
+export default function MemberSection({ member }: Props) {
   return (
     <>
-      <Link href="/speakers">
+      <Link href="/members">
         <a className={styles.backlink}>
           <svg
             viewBox="0 0 24 24"
@@ -52,35 +54,46 @@ export default function SpeakerSection({ speaker }: Props) {
           >
             <path d="M15 18l-6-6 6-6" />
           </svg>
-          Back to speakers
+          Back to members
         </a>
       </Link>
-      <div key={speaker.name} className={styles.container}>
+      <div key={member.name} className={styles.container}>
         <div style={{ minWidth: '300px' }}>
           <Image
-            alt={speaker.name}
-            title={speaker.name}
-            src={speaker.image.url}
+            alt={member.name}
+            title={member.name}
+            src={member.image.url}
             className={styles.image}
             loading="lazy"
             height={400}
             width={300}
           />
         </div>
-        <div className={styles['speaker-details']}>
+        <div className={styles['member-details']}>
           <div>
-            <h1 className={styles.name}>{speaker.name}</h1>
+            <h1 className={styles.name}>{member.name}</h1>
             <p className={styles.title}>
-              {`${speaker.title} @ `}
-              <span className={styles.company}>{speaker.company}</span>
+              {`${member.title} @ `}
+              <span className={styles.company}>{member.company}</span>
             </p>
+
             <h2 className={styles['bio-header']}>Bio</h2>
-            <p className={styles.bio}>{speaker.bio}</p>
+            <p className={styles.bio}>{member.bio}</p>
+
+            {member.content && (
+              <div>
+                <h3 className={styles['socials-header']}>More</h3>
+                <div className={styles.bio}>
+                  <StructuredText data={member.content}></StructuredText>
+                </div>
+              </div>
+            )}
+
             <h3 className={styles['socials-header']}>Social Media</h3>
-            {speaker.twitter ? (
+            {member.twitter ? (
               <a
                 aria-label="Twitter"
-                href={speaker.twitter}
+                href={member.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -91,11 +104,11 @@ export default function SpeakerSection({ speaker }: Props) {
                 <TwitterIcon />
               </span>
             )}
-            {speaker.github ? (
+            {member.github ? (
               <a
                 aria-label="GitHub"
                 className={styles.githubIcon}
-                href={speaker.github}
+                href={member.github}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -106,15 +119,34 @@ export default function SpeakerSection({ speaker }: Props) {
                 <GithubIcon color="#D8D8D8" size={24} />
               </span>
             )}
+
+            {member.skills && member.skills.length > 0 && (
+              <p className={styles.username}>
+                {member.skills.map(tech => (
+                  <span key={tech.slug + "-skill-span"} className={cn(styles.skeleton, styles.wrapper)}>
+                    {tech.text}
+                  </span>
+                ))}
+              </p>
+            )}
+
           </div>
         </div>
       </div>
-      {speaker.talk && (
-        <div className={styles['talk-details']}>
-          <h3 className={styles['socials-header']}>{speaker.talk.title}</h3>
-          <p>{speaker.talk.description}</p>
+
+      {/*{member.skills && member.skills.length > 0 && (
+        <div className={styles['member-details']}>
+          <h3 className={styles['socials-header']}>Skills</h3>
+          <p className={styles.username}>
+            {member.skills.map(tech => (
+              <span key={tech.slug + "-skill-span"} className={cn(styles.skeleton, styles.wrapper)}>
+                {tech.text}
+              </span>
+            ))}
+          </p>
         </div>
-      )}
+      )}*/}
+
     </>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,19 @@
   font-weight: 700;
   text-align: center;
   margin: 0 0 25px;
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom left, #16a085, #16a023, #f4d03f);
+  /*background: linear-gradient(to right , #00416a, #799f0c, #ffe000);*/
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-gradient-team {
+  background: linear-gradient(to bottom left, #19c8a7, #1cc12d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .info {

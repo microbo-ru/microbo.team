@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,19 @@
 import { GetStaticProps } from 'next';
 
 import Page from '@components/page';
-import JobsGrid from '@components/jobs-grid';
+import ProjectsGrid from '@components/projects-grid';
 import Layout from '@components/layout';
 import Header from '@components/header';
 
-import { getAllJobs } from '@lib/cms-api';
-import { Job } from '@lib/types';
+import { getAllProjects } from '@lib/cms-api';
+import { Project } from '@lib/types';
 import { META_DESCRIPTION } from '@lib/constants';
 
 type Props = {
-  jobs: Job[];
+  projects: Project[];
 };
 
-export default function Jobs({ jobs }: Props) {
+export default function Projects({ projects }: Props) {
   const meta = {
     title: 'Career Fair - Virtual Event Starter Kit',
     description: META_DESCRIPTION
@@ -38,19 +38,19 @@ export default function Jobs({ jobs }: Props) {
   return (
     <Page meta={meta}>
       <Layout>
-        <Header hero="Career Fair" description={meta.description} />
-        <JobsGrid jobs={jobs} />
+        <Header hero="Projects Showcase" description={meta.description} />
+        <ProjectsGrid projects={projects} />
       </Layout>
     </Page>
   );
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const jobs = await getAllJobs();
+  const projects = await getAllProjects();
 
   return {
     props: {
-      jobs
+      projects
     },
     revalidate: 60
   };

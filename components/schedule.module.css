@@ -36,7 +36,7 @@
   width: 100%;
 }
 
-.stage-name {
+.year {
   font-size: 22px;
   color: #fff;
   line-height: 1.15;
@@ -49,14 +49,14 @@
   color: var(--brand);
 }
 
-.talks {
+.hacks {
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-top: 40px;
 }
 
-.talks > div {
+.hacks > div {
   margin-right: 24px;
 }
 
@@ -72,12 +72,12 @@
     padding: var(--space-8x) 0;
   }
 
-  .talks {
+  .hacks {
     flex-direction: row;
     margin-top: 0;
   }
 
-  .stage-name {
+  .year {
     font-size: var(--space-8x);
     position: sticky;
     left: 0;

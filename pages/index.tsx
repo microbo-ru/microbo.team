@@ -24,7 +24,8 @@ import { META_DESCRIPTION } from '@lib/constants';
 export default function Conf() {
   const { query } = useRouter();
   const meta = {
-    title: 'Demo - Virtual Event Starter Kit',
+    // TODO: promote to global variables | dato
+    title: 'Microbo team',
     description: META_DESCRIPTION
   };
   const ticketNumber = query.ticketNumber?.toString();

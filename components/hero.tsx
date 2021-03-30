@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Microbo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import cn from 'classnames';
 import styleUtils from './utils.module.css';
 import styles from './hero.module.css';
-import { BRAND_NAME, DATE, SITE_DESCRIPTION } from '@lib/constants';
+import { DATE, SITE_DESCRIPTION, TEAM_NAME } from '@lib/constants';
 
 export default function Hero() {
   return (
@@ -32,9 +32,9 @@ export default function Hero() {
       >
         {SITE_DESCRIPTION}
       </h2>
-      <h1 className={cn(styleUtils.appear, styleUtils['appear-third'], styles.hero)}>
-        The first {BRAND_NAME}
-        <br className={styleUtils['show-on-desktop']} /> global user conference
+      <h1 className={cn(styleUtils.appear, styleUtils['appear-third'], styles.hero, styles['hero-gradient'])}>
+        we're <span className={cn(styles['hero-gradient-team'])}>{TEAM_NAME}</span> team
+        <br className={styleUtils['show-on-desktop']} /> - developers with ♥
       </h1>
       <h2
         className={cn(
@@ -46,13 +46,14 @@ export default function Hero() {
       >
         {SITE_DESCRIPTION}
       </h2>
-      <div className={cn(styleUtils.appear, styleUtils['appear-fourth'], styles.info)}>
+      {/* TODO: update content*/}
+      {/*<div className={cn(styleUtils.appear, styleUtils['appear-fourth'], styles.info)}>
         <p>{DATE}</p>
         <div className={styles['description-separator']} />
         <p>
           <strong>Online</strong>
         </p>
-      </div>
+      </div>*/}
     </div>
   );
 }
