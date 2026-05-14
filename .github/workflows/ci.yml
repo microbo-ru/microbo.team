@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build CI image
+        run: docker build --file Dockerfile.ci --tag microbo-team-ci .
+
+      - name: Production build
+        run: docker run --rm --env DATOCMS_READ_ONLY_API_TOKEN= --env NEXT_TELEMETRY_DISABLED=1 microbo-team-ci yarn ci
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build CI image
+        run: docker build --file Dockerfile.ci --tag microbo-team-ci .
+
+      - name: ESLint
+        run: docker run --rm microbo-team-ci yarn lint

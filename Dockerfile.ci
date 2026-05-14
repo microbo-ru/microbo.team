@@ -1,0 +1,11 @@
+FROM node:12.22.12-bullseye
+
+WORKDIR /app
+
+ENV CI=true
+ENV NEXT_TELEMETRY_DISABLED=1
+
+COPY package.json yarn.lock ./
+RUN yarn install --pure-lockfile --ignore-scripts
+
+COPY . .

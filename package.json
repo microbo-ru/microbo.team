@@ -13,6 +13,8 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
+    "lint": "eslint pages components lib --ext .ts,.tsx",
+    "ci": "yarn build",
     "license": "addlicense -l apache -c 'Vercel Inc.' components/**/* lib/**/* pages/**/* styles/**/* *.ts *.js"
   },
   "dependencies": {
