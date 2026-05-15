@@ -15,7 +15,7 @@
  */
 
 import cn from 'classnames';
-import { useCallback, useState } from 'react';
+import { FormEvent, MouseEvent, useCallback, useState } from 'react';
 import styleUtils from './utils.module.css';
 import styles from './join-hack-entry.module.css';
 import LoadingDots from './loading-dots';
@@ -56,7 +56,7 @@ export default function JoinHackEntry({ onRegister, hack }: Props) {
   const [errorMsg, setErrorMsg] = useState('');
 
   const onSubmit = useCallback(
-    async e => {
+    async (e: FormEvent<HTMLFormElement>) => {
       try {
         e.preventDefault();
         setFormState('loading');
@@ -82,7 +82,7 @@ export default function JoinHackEntry({ onRegister, hack }: Props) {
 
   useEmailQueryParam('login', setEmailInput);
 
-  const onTryAgainClick = useCallback(e => {
+  const onTryAgainClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setErrorMsg('');
     setFormState('default');

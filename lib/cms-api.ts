@@ -28,10 +28,10 @@ if (process.env.DATOCMS_READ_ONLY_API_TOKEN) {
   cmsApi = datoCmsApi;
 } else {
   cmsApi = {
-    getAllMembers: async () => [],
-    getAllHacks: async () => [],
-    getAllSponsors: async () => [],
-    getAllProjects: async () => []
+    getAllMembers: () => Promise.resolve([]),
+    getAllHacks: () => Promise.resolve([]),
+    getAllSponsors: () => Promise.resolve([]),
+    getAllProjects: () => Promise.resolve([])
   };
 }
 

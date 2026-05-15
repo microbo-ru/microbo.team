@@ -15,7 +15,7 @@
  */
 
 import cn from 'classnames';
-import { Hack, Member, Talk } from '@lib/types';
+import { Hack } from '@lib/types';
 import styles from './schedule.module.css';
 import HackCard from '@components/hack-card';
 
@@ -51,7 +51,7 @@ function compareNumbersDesc(a: string, b: string) {
 
 export default function Schedule({ allHacks }: ScheduleProps) {
   // Group hacks by year
-  const yearBlocks = allHacks.reduce((byYear: any, hack) => {
+  const yearBlocks = allHacks.reduce<Record<string, Hack[]>>((byYear, hack) => {
     byYear[hack.year] = [...(byYear[hack.year] || []), hack];
     return byYear;
   }, {});

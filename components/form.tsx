@@ -74,7 +74,7 @@ export default function Form({ sharePage }: Props) {
       onSubmit={e => {
         if (formState === 'default') {
           setFormState('loading');
-          register(email)
+          void register(email)
             .then(async res => {
               if (!res.ok) {
                 throw new FormError(res);
@@ -97,7 +97,7 @@ export default function Form({ sharePage }: Props) {
                       )}`
                   )
                   .join('&');
-                router.replace(`/?${queryString}`, '/');
+                void router.replace(`/?${queryString}`, '/');
               } else {
                 setUserData(params);
                 setPageState('ticket');

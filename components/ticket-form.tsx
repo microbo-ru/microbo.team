@@ -152,7 +152,7 @@ export default function Form({ defaultUsername = '', setTicketGenerationState }:
             new Image().src = `https://github.com/${usernameFromResponse}.png`;
 
             // Prefetch the twitter share URL to eagerly generate the page
-            fetch(`/tickets/${usernameFromResponse}`).catch(_ => {});
+            void fetch(`/tickets/${usernameFromResponse}`).catch(() => {});
           })
           .catch(err => {
             // eslint-disable-next-line no-console
