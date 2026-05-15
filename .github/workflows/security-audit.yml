@@ -27,7 +27,6 @@ jobs:
     name: Yarn audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    continue-on-error: true
 
     steps:
       - name: Checkout
@@ -37,4 +36,5 @@ jobs:
         run: docker build --file Dockerfile.ci --tag microbo-team-ci .
 
       - name: Audit production dependencies
+        continue-on-error: true
         run: docker run --rm microbo-team-ci yarn audit --groups dependencies
