@@ -1660,10 +1660,10 @@ datocms-listen@^0.1.6:
   dependencies:
     "@0no-co/graphql.web" "^1.0.1"
 
-datocms-structured-text-generic-html-renderer@^1.1.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/datocms-structured-text-generic-html-renderer/-/datocms-structured-text-generic-html-renderer-1.3.0.tgz#7c91f969bae5b04670658b491fb5463aa3b80334"
-  integrity sha512-9O9ccHSJ2sFZ6GVYYGYPBqsJrjiW1pFVvp8acSIKNHAV6IIOsHh2oeBxsvDLJgixnmiPpDDryeHXl8hwTs+OlQ==
+datocms-structured-text-generic-html-renderer@1.2.0, datocms-structured-text-generic-html-renderer@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/datocms-structured-text-generic-html-renderer/-/datocms-structured-text-generic-html-renderer-1.2.0.tgz#b1d1139b2fd6d7f3541aec497a8be35d91f85a3b"
+  integrity sha512-77w/bfO0GE43ck4ClhkeNs7vG3zmsgo1uyBLEomeALtfj0rlbCWS5jI33svMl3ek1BbBukTVdqLaliyrxCwpWg==
   dependencies:
     datocms-structured-text-utils "^1.2.0"
 
