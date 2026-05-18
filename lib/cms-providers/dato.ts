@@ -18,7 +18,10 @@ import { Sponsor, Stage, Speaker, Member, Hack, Project } from '@lib/types';
 const API_URL = 'https://graphql.datocms.com/';
 const API_TOKEN = process.env.DATOCMS_READ_ONLY_API_TOKEN;
 
-async function fetchCmsAPI(query: string, { variables }: { variables?: Record<string, any> } = {}) {
+async function fetchCmsAPI<T>(
+  query: string,
+  { variables }: { variables?: Record<string, unknown> } = {}
+): Promise<T> {
   const res = await fetch(API_URL, {
     method: 'POST',
     headers: {
@@ -31,7 +34,7 @@ async function fetchCmsAPI(query: string, { variables }: { variables?: Record<st
     })
   });
 
-  const json = await res.json();
+  const json = (await res.json()) as { data: T; errors?: unknown };
   if (json.errors) {
     // eslint-disable-next-line no-console
     console.error(json.errors);
@@ -42,7 +45,7 @@ async function fetchCmsAPI(query: string, { variables }: { variables?: Record<st
 }
 
 export async function getAllSpeakers(): Promise<Speaker[]> {
-  const data = await fetchCmsAPI(`
+  const data = await fetchCmsAPI<{ allSpeakers: Speaker[] }>(`
     {
       allSpeakers(first: 100) {
         name
@@ -70,7 +73,7 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
 }
 
 export async function getAllMembers(): Promise<Member[]> {
-  const data = await fetchCmsAPI(`
+  const data = await fetchCmsAPI<{ allMembers: Member[] }>(`
     {
       allMembers(first: 100) {
         name
@@ -100,7 +103,7 @@ export async function getAllMembers(): Promise<Member[]> {
 }
 
 export async function getAllStages(): Promise<Stage[]> {
-  const data = await fetchCmsAPI(`
+  const data = await fetchCmsAPI<{ allStages: Stage[] }>(`
     {
       allStages(first: 100, orderBy: order_ASC) {
         name
@@ -127,7 +130,7 @@ export async function getAllStages(): Promise<Stage[]> {
 }
 
 export async function getAllHacks(): Promise<Hack[]> {
-  const data = await fetchCmsAPI(`
+  const data = await fetchCmsAPI<{ allHacks: Hack[] }>(`
     {
       allHacks(first: 100, orderBy: order_ASC) {
         name
@@ -162,7 +165,7 @@ export async function getAllHacks(): Promise<Hack[]> {
 }
 
 export async function getAllSponsors(): Promise<Sponsor[]> {
-  const data = await fetchCmsAPI(`
+  const data = await fetchCmsAPI<{ allCompanies: Sponsor[] }>(`
     {
       allCompanies(first: 100, orderBy: tierRank_ASC) {
         name
@@ -192,7 +195,7 @@ export async function getAllSponsors(): Promise<Sponsor[]> {
 }
 
 export async function getAllProjects(): Promise<Project[]> {
-  const data = await fetchCmsAPI(`
+  const data = await fetchCmsAPI<{ allProjects: Project[] }>(`
     {
       allProjects(first: 100) {
         id

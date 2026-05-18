@@ -1,0 +1,12 @@
+FROM node:24-bookworm
+
+WORKDIR /app
+
+ENV CI=true
+ENV NODE_OPTIONS=--openssl-legacy-provider
+ENV NEXT_TELEMETRY_DISABLED=1
+
+COPY package.json yarn.lock ./
+RUN yarn install --pure-lockfile --ignore-scripts
+
+COPY . .

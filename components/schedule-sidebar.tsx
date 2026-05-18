@@ -45,7 +45,7 @@ export default function ScheduleSidebar({ allStages }: Props) {
         onChange={e => {
           const slug = e.target.value;
           setCurrentStageSlug(slug);
-          router.push(`/stage/${slug}`);
+          void router.push(`/stage/${slug}`);
         }}
       >
         {allStages.map(stage => (

@@ -19,7 +19,6 @@ import { useRouter } from 'next/router';
 import { Hack } from '@lib/types';
 import styles from './hack-sidebar.module.css';
 import Select from './select';
-import { SHORT_DATE } from '@lib/constants';
 import MemberCard from '@components/member-card';
 
 type Props = {
@@ -44,7 +43,7 @@ export default function HackSidebar({ allHacks }: Props) {
         onChange={e => {
           const slug = e.target.value;
           setCurrentHackSlug(slug);
-          router.push(`/hack/${slug}`);
+          void router.push(`/hack/${slug}`);
         }}
       >
         {allHacks.map(hack => (
